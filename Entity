@@ -1,0 +1,104 @@
+package .entity;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.Date;
+
+ /**
+ * ;
+ * @author : http://www.chiner.pro
+ * @date : 2022-8-9
+ */
+@ApiModel(value = "",description = "")
+public class Blog implements Serializable,Cloneable{
+    /** ID */
+    @ApiModelProperty(name = "ID",notes = "")
+    private Integer id ;
+    /** 标题 */
+    @ApiModelProperty(name = "标题",notes = "")
+    private String title ;
+    /** 正文 */
+    @ApiModelProperty(name = "正文",notes = "")
+    private String body ;
+    /** 用户 */
+    @ApiModelProperty(name = "用户",notes = "")
+    private Integer uid ;
+    /** 收藏 */
+    @ApiModelProperty(name = "收藏",notes = "")
+    private Integer collection ;
+    /** 点赞 */
+    @ApiModelProperty(name = "点赞",notes = "")
+    private Integer praise ;
+    /** tv */
+    @ApiModelProperty(name = "tv",notes = "")
+    private String videoName ;
+    /** 图片 */
+    @ApiModelProperty(name = "图片",notes = "")
+    private String imager ;
+
+    /** ID */
+    public Integer getId(){
+        return this.id;
+    }
+    /** ID */
+    public void setId(Integer id){
+        this.id=id;
+    }
+    /** 标题 */
+    public String getTitle(){
+        return this.title;
+    }
+    /** 标题 */
+    public void setTitle(String title){
+        this.title=title;
+    }
+    /** 正文 */
+    public String getBody(){
+        return this.body;
+    }
+    /** 正文 */
+    public void setBody(String body){
+        this.body=body;
+    }
+    /** 用户 */
+    public Integer getUid(){
+        return this.uid;
+    }
+    /** 用户 */
+    public void setUid(Integer uid){
+        this.uid=uid;
+    }
+    /** 收藏 */
+    public Integer getCollection(){
+        return this.collection;
+    }
+    /** 收藏 */
+    public void setCollection(Integer collection){
+        this.collection=collection;
+    }
+    /** 点赞 */
+    public Integer getPraise(){
+        return this.praise;
+    }
+    /** 点赞 */
+    public void setPraise(Integer praise){
+        this.praise=praise;
+    }
+    /** tv */
+    public String getVideoName(){
+        return this.videoName;
+    }
+    /** tv */
+    public void setVideoName(String videoName){
+        this.videoName=videoName;
+    }
+    /** 图片 */
+    public String getImager(){
+        return this.imager;
+    }
+    /** 图片 */
+    public void setImager(String imager){
+        this.imager=imager;
+    }
+}

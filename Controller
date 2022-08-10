@@ -1,0 +1,85 @@
+package .controller;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import .entity.Blog;
+import .service.BlogService;
+
+ /**
+ * ;(blog)表控制层
+ * @author : http://www.chiner.pro
+ * @date : 2022-8-9
+ */
+@Api(tags = "对象功能接口")
+@RestController
+@RequestMapping("/blog")
+public class BlogController{
+    @Autowired
+    private BlogService blogService;
+    
+    /** 
+     * 通过ID查询单条数据 
+     *
+     * @param id 主键
+     * @return 实例对象
+     */
+    @ApiOperation("通过ID查询单条数据")
+    @GetMapping("{id}")
+    public ResponseEntity<Blog> queryById(Integer id){
+        return ResponseEntity.ok(blogService.queryById(id));
+    }
+    
+    /** 
+     * 分页查询
+     *
+     * @param blog 筛选条件
+     * @param pageRequest 分页对象
+     * @return 查询结果
+     */
+    @ApiOperation("分页查询")
+    @GetMapping
+    public ResponseEntity<Page<Blog>> paginQuery(Blog blog, PageRequest pageRequest){
+        return ResponseEntity.ok(blogService.paginQuery(blog, pageRequest));
+    }
+    
+    /** 
+     * 新增数据
+     *
+     * @param blog 实例对象
+     * @return 实例对象
+     */
+    @ApiOperation("新增数据")
+    @PostMapping
+    public ResponseEntity<Blog> add(Blog blog){
+        return ResponseEntity.ok(blogService.insert(blog));
+    }
+    
+    /** 
+     * 更新数据
+     *
+     * @param blog 实例对象
+     * @return 实例对象
+     */
+    @ApiOperation("更新数据")
+    @PutMapping
+    public ResponseEntity<Blog> edit(Blog blog){
+        return ResponseEntity.ok(blogService.update(blog));
+    }
+    
+    /** 
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+    @ApiOperation("通过主键删除数据")
+    @DeleteMapping
+    public ResponseEntity<Boolean> deleteById(Integer id){
+        return ResponseEntity.ok(blogService.deleteById(id));
+    }
+}

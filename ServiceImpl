@@ -1,0 +1,75 @@
+package .service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import .entity.Blog;
+import .mapper.BlogMapper;
+import .service.BlogService;
+ /**
+ * ;(blog)表服务实现类
+ * @author : http://www.chiner.pro
+ * @date : 2022-8-9
+ */
+@Service
+public class BlogServiceImpl implements BlogService{
+    @Autowired
+    private BlogMapper blogMapper;
+    
+    /** 
+     * 通过ID查询单条数据 
+     *
+     * @param id 主键
+     * @return 实例对象
+     */
+    public Blog queryById(Integer id){
+        return blogMapper.queryById(id);
+    }
+    
+    /** 
+     * 分页查询
+     *
+     * @param blog 筛选条件
+     * @param pageRequest 分页对象
+     * @return 查询结果
+     */
+    public Page<Blog> paginQuery(Blog blog, PageRequest pageRequest){
+        long total = blogMapper.count(blog);
+        return new PageImpl<>(blogMapper.queryAllByLimit(blog, pageRequest), pageRequest, total);
+    }
+    
+    /** 
+     * 新增数据
+     *
+     * @param blog 实例对象
+     * @return 实例对象
+     */
+    public Blog insert(Blog blog){
+        blogMapper.insert(blog);
+        return blog;
+    }
+    
+    /** 
+     * 更新数据
+     *
+     * @param blog 实例对象
+     * @return 实例对象
+     */
+    public Blog update(Blog blog){
+        blogMapper.update(blog);
+        return queryById(blog.getId());
+    }
+    
+    /** 
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+    public boolean deleteById(Integer id){
+        int total = blogMapper.deleteById(id);
+        return total > 0;
+    }
+}
