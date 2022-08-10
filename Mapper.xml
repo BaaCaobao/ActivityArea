@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".mapper.ActivityAreaMapper">
+    <resultMap type=".entity.ActivityArea" id="ActivityAreaMap">
+        <result property="link" column="link" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <!-- 通过ID查询单条数据 -->
+    <select id="queryById" resultMap="ActivityAreaMap">
+        select
+            link
+        from activity_area
+        where UNDEFINED_ID = #{undefinedId}
+    </select>
+    
+    <!--分页查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ActivityAreaMap">
+        select
+            link
+        from activity_area
+        <where>
+            <if test="link != null and link != ''">
+                and link = #{link}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+    
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from activity_area
+        <where>
+            <if test="link != null and link != ''">
+                and link = #{link}
+            </if>
+        </where>
+    </select>
+    
+    <!--新增数据-->
+    <insert id="insert" keyProperty="UNDEFINED_ID" useGeneratedKeys="true">
+        insert into activity_area(link)
+        values (#{link})
+    </insert>
+    
+    <!-- 批量新增数据 -->
+    <insert id="insertBatch" keyProperty="UNDEFINED_ID" useGeneratedKeys="true">
+        insert into activity_area(link)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.link})
+        </foreach>
+    </insert>
+    
+    <!-- 批量新增或按主键更新数据 -->
+    <insert id="insertOrUpdateBatch" keyProperty="UNDEFINED_ID" useGeneratedKeys="true">
+        insert into activity_area(link)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.link})
+        </foreach>
+        on duplicate key update
+        link=values(link)
+    </insert>
+    
+    <!-- 更新数据 -->
+    <update id="update">
+        update activity_area
+        <set>
+            <if test="link != null and link != ''">
+                link = #{link},
+            </if>
+        </set>
+        where UNDEFINED_ID = #{undefinedId}
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from activity_area where UNDEFINED_ID = #{undefinedId}
+    </delete>
+</mapper>
