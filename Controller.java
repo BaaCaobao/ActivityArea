@@ -21,9 +21,9 @@ import .service.ActivityAreaService;
 public class ActivityAreaController{
     @Autowired
     private ActivityAreaService activityAreaService;
-    
-    /** 
-     * 通过ID查询单条数据 
+
+    /**
+     * 通过ID查询单条数据
      *
      * @param undefinedId 主键
      * @return 实例对象
@@ -33,8 +33,8 @@ public class ActivityAreaController{
     public ResponseEntity<ActivityArea> queryById(String undefinedId){
         return ResponseEntity.ok(activityAreaService.queryById(undefinedId));
     }
-    
-    /** 
+
+    /**
      * 分页查询
      *
      * @param activityArea 筛选条件
@@ -46,8 +46,8 @@ public class ActivityAreaController{
     public ResponseEntity<Page<ActivityArea>> paginQuery(ActivityArea activityArea, PageRequest pageRequest){
         return ResponseEntity.ok(activityAreaService.paginQuery(activityArea, pageRequest));
     }
-    
-    /** 
+
+    /**
      * 新增数据
      *
      * @param activityArea 实例对象
@@ -58,20 +58,21 @@ public class ActivityAreaController{
     public ResponseEntity<ActivityArea> add(ActivityArea activityArea){
         return ResponseEntity.ok(activityAreaService.insert(activityArea));
     }
-    
-    /** 
+
+    /**
      * 更新数据
      *
      * @param activityArea 实例对象
      * @return 实例对象
+     *
      */
     @ApiOperation("更新数据")
     @PutMapping
     public ResponseEntity<ActivityArea> edit(ActivityArea activityArea){
         return ResponseEntity.ok(activityAreaService.update(activityArea));
     }
-    
-    /** 
+
+    /**
      * 通过主键删除数据
      *
      * @param undefinedId 主键
